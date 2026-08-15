@@ -1,0 +1,99 @@
+leroy_merlin_1=# \d produtos;
+                             Tabela "public.produtos"
+       Coluna       |          Tipo          | Ordenaτπo | Pode ser nulo | Padrπo
+--------------------+------------------------+-----------+---------------+--------
+ id                 | integer                |           | not null      |
+ loja_id            | integer                |           | not null      |
+ nome               | character varying(200) |           | not null      |
+ marca              | character varying(100) |           |               |
+ vendedor           | character varying(100) |           | not null      |
+ categoria_id       | integer                |           | not null      |
+ preco              | numeric(10,2)          |           | not null      |
+ quantidade_estoque | integer                |           | not null      | 0
+ fileira            | integer                |           |               |
+ especificacoes     | jsonb                  |           |               |
+═ndices:
+    "produtos_pkey" PRIMARY KEY, btree (id, loja_id)
+Restriτ⌡es de chave estrangeira:
+    "produtos_categoria_id_fkey" FOREIGN KEY (categoria_id) REFERENCES categorias(id)
+
+leroy_merlin_1=# \d categorias;
+                       Tabela "public.categorias"
+  Coluna   |          Tipo          | Ordenaτπo | Pode ser nulo | Padrπo
+-----------+------------------------+-----------+---------------+--------
+ id        | integer                |           | not null      |
+ nome      | character varying(100) |           | not null      |
+ parent_id | integer                |           |               |
+ nivel     | integer                |           | not null      |
+═ndices:
+    "categorias_pkey" PRIMARY KEY, btree (id)
+Restriτ⌡es de chave estrangeira:
+    "categorias_parent_id_fkey" FOREIGN KEY (parent_id) REFERENCES categorias(id) ON DELETE RESTRICT
+Referenciada por:
+    TABLE "categorias" CONSTRAINT "categorias_parent_id_fkey" FOREIGN KEY (parent_id) REFERENCES categorias(id) ON DELETE RESTRICT
+    TABLE "produtos" CONSTRAINT "produtos_categoria_id_fkey" FOREIGN KEY (categoria_id) REFERENCES categorias(id)
+
+leroy_merlin_1=# \d lojas;
+                                Tabela "public.lojas"
+         Coluna         |          Tipo          | Ordenaτπo | Pode ser nulo | Padrπo
+------------------------+------------------------+-----------+---------------+--------
+ id                     | integer                |           | not null      |
+ nome                   | character varying(100) |           | not null      |
+ cidade                 | character varying(100) |           | not null      |
+ endereco               | character varying(255) |           | not null      |
+ is_centro_distribuicao | boolean                |           |               | false
+═ndices:
+    "lojas_pkey" PRIMARY KEY, btree (id)
+
+
+/////// exemplo de produto cadastrado na tabela produtos /////////
+
+(
+    3001, 1001,
+    'Furadeira de Impacto Bosch GSB 550 RE550W 1/2" 127V (110V) com Chave de Mandril e Acessórios',
+    'Bosch',
+    'LEROY MERLIN',
+    2003,
+    319.90,
+    14,
+    4,
+    '{
+        "codigo": "89396846",
+        "ean": "7891009858104",
+        "modelo": "GSB 550 RE",
+        "potencia": "550 W",
+        "tensao": "127V (110V)",
+        "alimentacao": "Elétrica",
+        "impacto": true,
+        "mandril": "1/2 polegada",
+        "capacidade_mandril": "13 mm",
+        "velocidade": "3100 rpm",
+        "peso": "1,70 Kg",
+        "uso_indicado": "Madeira, metal, concreto e plástico",
+        "referencia_produto": "06011B60D3-000",
+        "imagem_pagina_url": "https://www.leroymerlin.com.br/furadeira-de-impacto-bosch-gsb-550-re550w-1-2-127v--110v--com-chave-de-mandril-e-acessorios_89396846",
+        "imagem_url_status": "url_da_imagem_direta_nao_exposta_pela_ferramenta_de_navegacao",
+        "origem": "Leroy Merlin",
+        "dados_de_estoque": "simulados"
+    }'::jsonb
+)
+
+///////////////
+
+
+////////// exemplo categoria na tabela categorias //////////////////
+
+    (2001, 'Ferramentas', NULL, 1),
+    (2002, 'Ferramentas para Furar e Parafusar', 2001, 2),
+    (2003, 'Furadeiras', 2002, 3)
+
+//////////////////////////////////////
+
+////////////// exemplo loja na tabela lojas ////////////////////////////
+
+    (1001, 'Interlagos', 'São Paulo',
+     'Avenida Interlagos, 2255', false),
+    (1002, 'São Caetano', 'São Caetano do Sul',
+     'Avenida do Estado, 1750', false),
+
+//////////////////////////////////
