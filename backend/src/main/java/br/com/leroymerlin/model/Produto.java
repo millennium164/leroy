@@ -14,6 +14,7 @@ public class Produto {
     private Integer quantidadeEstoque;
     private Integer fileira;
     private String especificacoes;
+    private String categoriaNome;
 
     public Produto() {
     }
@@ -33,6 +34,13 @@ public class Produto {
     public Produto(Integer id, Integer lojaId, String nome, String marca, String vendedor,
                    Integer categoriaId, BigDecimal preco, Integer quantidadeEstoque,
                    Integer fileira, String especificacoes) {
+        this(id, lojaId, nome, marca, vendedor, categoriaId, preco, quantidadeEstoque,
+                fileira, especificacoes, null);
+    }
+
+    public Produto(Integer id, Integer lojaId, String nome, String marca, String vendedor,
+                   Integer categoriaId, BigDecimal preco, Integer quantidadeEstoque,
+                   Integer fileira, String especificacoes, String categoriaNome) {
         this.id = id;
         this.lojaId = lojaId;
         this.nome = nome;
@@ -43,6 +51,7 @@ public class Produto {
         this.quantidadeEstoque = quantidadeEstoque;
         this.fileira = fileira;
         this.especificacoes = especificacoes;
+        this.categoriaNome = categoriaNome;
     }
 
     public Integer getId() {
@@ -123,5 +132,13 @@ public class Produto {
 
     public void setEspecificacoes(String especificacoes) {
         this.especificacoes = especificacoes;
+    }
+
+    public String getCategoriaNome() {
+        return categoriaNome;
+    }
+
+    public void setCategoriaNome(String categoriaNome) {
+        this.categoriaNome = categoriaNome;
     }
 }
