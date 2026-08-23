@@ -61,7 +61,7 @@ public class ApiServer {
             ctx.json(Map.of("erro", e.getMessage() == null ? "Erro interno" : e.getMessage()));
         });
 
-        int port = parsePort(EnvLoader.get("API_PORT"), 8080);
+        int port = parsePort(EnvLoader.get("PORT"), parsePort(EnvLoader.get("API_PORT"), 8080));
         app.start("0.0.0.0", port);
         System.out.println("API Leroy Merlin em http://127.0.0.1:" + port);
     }

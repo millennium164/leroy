@@ -1,3 +1,4 @@
 target/
 out/
 .env
+dependency-reduced-pom.xml
