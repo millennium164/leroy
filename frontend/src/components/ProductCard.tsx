@@ -1,5 +1,7 @@
-import { MapPinned, Package } from 'lucide-react'
+import { useState } from 'react'
+import { ImageOff, MapPinned, Package } from 'lucide-react'
 import { Produto } from '../api/client'
+import { imagemDoProduto } from '../utils/imagensProdutos'
 
 interface ProductCardProps {
   produto: Produto
@@ -11,8 +13,24 @@ function formatPreco(preco: number) {
 }
 
 export function ProductCard({ produto, onLeveAteAqui }: ProductCardProps) {
+  const [imagemFalhou, setImagemFalhou] = useState(false)
+  const imagem = imagemDoProduto(produto.id)
+
   return (
     <article className="flex h-full flex-col rounded-2xl border border-stone-200 bg-white p-5 shadow-sm animate-fadeIn">
+      <div className="mb-4 flex h-40 items-center justify-center overflow-hidden rounded-xl bg-stone-50">
+        {imagem && !imagemFalhou ? (
+          <img
+            src={imagem}
+            alt={produto.nome}
+            loading="lazy"
+            onError={() => setImagemFalhou(true)}
+            className="h-full w-full object-contain"
+          />
+        ) : (
+          <ImageOff size={28} className="text-stone-300" aria-hidden="true" />
+        )}
+      </div>
       <div className="mb-3 flex items-center justify-between gap-2">
         <span className="rounded-full bg-leroy-100 px-2.5 py-0.5 text-xs font-medium text-leroy-800">
           {produto.marca ?? 'Marca própria'}

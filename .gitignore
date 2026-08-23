@@ -3,3 +3,10 @@ out/
 .env
 frontend/node_modules/
 frontend/dist/
+
+# Imagens de trabalho soltas na raiz. A barra inicial limita a regra a esta
+# pasta, mantendo frontend/src/assets/ versionado (o build do Vite depende dele).
+/*.webp
+/*.jpg
+/*.jpeg
+/*.png
