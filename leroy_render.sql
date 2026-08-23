@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
-\restrict kzkmCBxG0wKRlyNqZ5BGEIjIj8y1BdgdEPErzJNbjS24B2eVAeXHApjwtSUSLxe
+\restrict LbDGwSldUA53HOyksZ4tETfdgtpaTcQ3HdyedOnFJEYrg2RXtTmkP4SFQxLYLCT
 
 -- Dumped from database version 18.6
 -- Dumped by pg_dump version 18.6
@@ -24,7 +24,7 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: categorias; Type: TABLE; Schema: public; Owner: postgres
+-- Name: categorias; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.categorias (
@@ -35,10 +35,8 @@ CREATE TABLE public.categorias (
 );
 
 
-ALTER TABLE public.categorias OWNER TO postgres;
-
 --
--- Name: lojas; Type: TABLE; Schema: public; Owner: postgres
+-- Name: lojas; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.lojas (
@@ -50,10 +48,8 @@ CREATE TABLE public.lojas (
 );
 
 
-ALTER TABLE public.lojas OWNER TO postgres;
-
 --
--- Name: produtos; Type: TABLE; Schema: public; Owner: postgres
+-- Name: produtos; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.produtos (
@@ -70,10 +66,8 @@ CREATE TABLE public.produtos (
 );
 
 
-ALTER TABLE public.produtos OWNER TO postgres;
-
 --
--- Data for Name: categorias; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: categorias; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.categorias (id, nome, parent_id, nivel) FROM stdin;
@@ -107,7 +101,7 @@ COPY public.categorias (id, nome, parent_id, nivel) FROM stdin;
 
 
 --
--- Data for Name: lojas; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: lojas; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.lojas (id, nome, cidade, endereco, is_centro_distribuicao) FROM stdin;
@@ -119,7 +113,7 @@ COPY public.lojas (id, nome, cidade, endereco, is_centro_distribuicao) FROM stdi
 
 
 --
--- Data for Name: produtos; Type: TABLE DATA; Schema: public; Owner: postgres
+-- Data for Name: produtos; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.produtos (id, loja_id, nome, marca, vendedor, categoria_id, preco, quantidade_estoque, fileira, especificacoes) FROM stdin;
@@ -157,7 +151,7 @@ COPY public.produtos (id, loja_id, nome, marca, vendedor, categoria_id, preco, q
 
 
 --
--- Name: categorias categorias_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: categorias categorias_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.categorias
@@ -165,7 +159,7 @@ ALTER TABLE ONLY public.categorias
 
 
 --
--- Name: lojas lojas_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: lojas lojas_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.lojas
@@ -173,7 +167,7 @@ ALTER TABLE ONLY public.lojas
 
 
 --
--- Name: produtos produtos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: produtos produtos_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.produtos
@@ -181,7 +175,7 @@ ALTER TABLE ONLY public.produtos
 
 
 --
--- Name: categorias categorias_parent_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: categorias categorias_parent_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.categorias
@@ -189,7 +183,7 @@ ALTER TABLE ONLY public.categorias
 
 
 --
--- Name: produtos produtos_categoria_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: produtos produtos_categoria_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.produtos
@@ -197,7 +191,7 @@ ALTER TABLE ONLY public.produtos
 
 
 --
--- Name: produtos produtos_loja_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+-- Name: produtos produtos_loja_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.produtos
@@ -208,5 +202,5 @@ ALTER TABLE ONLY public.produtos
 -- PostgreSQL database dump complete
 --
 
-\unrestrict kzkmCBxG0wKRlyNqZ5BGEIjIj8y1BdgdEPErzJNbjS24B2eVAeXHApjwtSUSLxe
+\unrestrict LbDGwSldUA53HOyksZ4tETfdgtpaTcQ3HdyedOnFJEYrg2RXtTmkP4SFQxLYLCT
 
