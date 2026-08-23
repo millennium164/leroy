@@ -3,6 +3,7 @@ package br.com.leroymerlin.api;
 import br.com.leroymerlin.api.dto.RecomendacaoRequest;
 import br.com.leroymerlin.dao.LojaDao;
 import br.com.leroymerlin.dao.ProdutoDao;
+import br.com.leroymerlin.service.EnvLoader;
 import br.com.leroymerlin.service.RecomendacaoService;
 import io.javalin.Javalin;
 import io.javalin.http.HttpStatus;
@@ -60,7 +61,19 @@ public class ApiServer {
             ctx.json(Map.of("erro", e.getMessage() == null ? "Erro interno" : e.getMessage()));
         });
 
-        app.start("0.0.0.0", 8080);
-        System.out.println("API Leroy Merlin em http://127.0.0.1:8080");
+        int port = parsePort(EnvLoader.get("API_PORT"), 8080);
+        app.start("0.0.0.0", port);
+        System.out.println("API Leroy Merlin em http://127.0.0.1:" + port);
+    }
+
+    private static int parsePort(String value, int fallback) {
+        if (value == null || value.isBlank()) {
+            return fallback;
+        }
+        try {
+            return Integer.parseInt(value.trim());
+        } catch (NumberFormatException e) {
+            return fallback;
+        }
     }
 }
