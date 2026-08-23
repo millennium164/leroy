@@ -18,8 +18,8 @@ export function Header({ lojas, lojaId, onLojaChange, onInicio }: HeaderProps) {
           className="flex items-center gap-3 rounded-lg text-left outline-none ring-leroy-500/30 hover:opacity-90 focus-visible:ring-4"
           aria-label="Voltar à página inicial"
         >
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-leroy-500 text-lg font-bold text-white">
-            L
+          <span className="flex h-9 min-w-9 items-center justify-center rounded-lg bg-leroy-500 px-1.5 text-xs font-bold tracking-wide text-white">
+            LM
           </span>
           <div>
             <p className="text-sm font-semibold leading-tight text-stone-900">Leroy Merlin</p>

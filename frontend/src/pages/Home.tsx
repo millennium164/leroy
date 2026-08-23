@@ -4,6 +4,7 @@ import { Header } from '../components/Header'
 import { SearchBar } from '../components/SearchBar'
 import { SuggestionList } from '../components/SuggestionList'
 import { ProductCard } from '../components/ProductCard'
+import { StoreRouteModal } from '../components/StoreRouteModal'
 import { Loja, Produto, Recomendacao, listarLojas, recomendarProdutos } from '../api/client'
 import { useDebouncedSuggest } from '../hooks/useDebouncedSuggest'
 
@@ -19,6 +20,7 @@ export function Home() {
   const [erro, setErro] = useState<string | null>(null)
   const [resultado, setResultado] = useState<Recomendacao | null>(null)
   const [mostrarSugestoes, setMostrarSugestoes] = useState(true)
+  const [produtoRota, setProdutoRota] = useState<Produto | null>(null)
 
   const { sugestoes, carregando: carregandoSugestoes } = useDebouncedSuggest(
     lojaId,
@@ -59,9 +61,15 @@ export function Home() {
   }
 
   const selecionarSugestao = (produto: Produto) => {
+    buscaId.current += 1
     setQuery(produto.nome)
     setMostrarSugestoes(false)
-    void buscar(produto.nome)
+    setLoading(false)
+    setErro(null)
+    setResultado({
+      explicacao: 'Produto encontrado no estoque desta loja.',
+      produtos: [produto],
+    })
   }
 
   const queroOutraCoisa = () => {
@@ -69,6 +77,7 @@ export function Home() {
     setLoading(false)
     setResultado(null)
     setErro(null)
+    setProdutoRota(null)
     setQuery('')
     setMostrarSugestoes(true)
     inputRef.current?.focus()
@@ -157,7 +166,11 @@ export function Home() {
               ) : (
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   {resultado.produtos.map((produto) => (
-                    <ProductCard key={`${produto.lojaId}-${produto.id}`} produto={produto} />
+                    <ProductCard
+                      key={`${produto.lojaId}-${produto.id}`}
+                      produto={produto}
+                      onLeveAteAqui={() => setProdutoRota(produto)}
+                    />
                   ))}
                 </div>
               )}
@@ -165,6 +178,7 @@ export function Home() {
           )}
         </div>
       </main>
+      <StoreRouteModal produto={produtoRota} onClose={() => setProdutoRota(null)} />
     </div>
   )
 }
