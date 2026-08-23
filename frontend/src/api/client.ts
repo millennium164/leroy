@@ -1,3 +1,11 @@
+// Vazio em desenvolvimento, onde o proxy do Vite resolve /api. Em producao
+// recebe a URL absoluta do backend, que responde com CORS liberado.
+const baseUrl = (import.meta.env.VITE_API_URL ?? '').replace(/\/+$/, '')
+
+function rota(caminho: string) {
+  return `${baseUrl}${caminho}`
+}
+
 export interface Loja {
   id: number
   nome: string
@@ -25,7 +33,7 @@ export interface Recomendacao {
 }
 
 export async function listarLojas(): Promise<Loja[]> {
-  const response = await fetch('/api/lojas')
+  const response = await fetch(rota('/api/lojas'))
   if (!response.ok) {
     throw new Error('Não foi possível carregar as lojas')
   }
@@ -37,7 +45,7 @@ export async function sugerirProdutos(lojaId: number, q: string): Promise<Produt
     lojaId: String(lojaId),
     q,
   })
-  const response = await fetch(`/api/produtos/sugerir?${params}`)
+  const response = await fetch(rota(`/api/produtos/sugerir?${params}`))
   if (!response.ok) {
     throw new Error('Não foi possível buscar sugestões')
   }
@@ -45,7 +53,7 @@ export async function sugerirProdutos(lojaId: number, q: string): Promise<Produt
 }
 
 export async function recomendarProdutos(lojaId: number, texto: string): Promise<Recomendacao> {
-  const response = await fetch('/api/produtos/recomendar', {
+  const response = await fetch(rota('/api/produtos/recomendar'), {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ lojaId, texto }),
