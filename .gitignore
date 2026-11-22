@@ -1,0 +1,6 @@
+.env
+**/.env
+backend/target/
+backend/out/
+frontend/node_modules/
+frontend/dist/
